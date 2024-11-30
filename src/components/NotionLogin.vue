@@ -4,3 +4,9 @@
         <v-btn color="primary" class="text-none">authenticate</v-btn>
     </div>
 </template>
+
+<script>
+export default {
+    name: 'NotionLogin'
+}
+</script>

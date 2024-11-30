@@ -27,12 +27,12 @@
             </v-list>
             </v-row>
         </div>
-
     </div>
 </template>
 
 <script>
 export default {
+    name: 'RenameCourses',
     data() {
         return {
             items: [
@@ -45,5 +45,4 @@ export default {
         }
     }
 }
-
 </script>
