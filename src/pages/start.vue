@@ -11,7 +11,10 @@ import Sidebar from '@/components/Sidebar.vue';
             <v-row class="centered-page">
                 <v-col cols="3">
                     <v-card elevation="12" class="centered-content rounded-xl" height="70vh">
-                        <sidebar></sidebar>
+                        <Sidebar
+                            :steps="steps"
+                            :currentStep="currentStep"
+                            @update-step="updateStep"/>
                     </v-card>
                 </v-col>
 
@@ -50,9 +53,9 @@ export default {
             component: 'InputCalLink',
             currentStep: 0,
             steps: [
-                {component: "InputCalLink"},
-                {component: "NotionLogin"},
-                {component: "RenameCourses"}
+                {text: 'import assignments', component: "InputCalLink", icon: "fa-solid fa-file-import"},
+                {text: 'log into Notion', component: "NotionLogin", icon: "fa-solid fa-right-to-bracket"},
+                {text: 'edit', component: "RenameCourses", icon: "fa-solid fa-pen-to-square"}
             ],
         }
     },
@@ -68,8 +71,12 @@ export default {
             if (newStep >= 0 && newStep < this.steps.length) {
                 this.currentStep = newStep;
                 this.component = this.steps[this.currentStep].component;
+            }
+        },
+        updateStep(index: number) {
+            this.currentStep=index;
+            this.component=this.steps[this.currentStep].component;
         }
-    }
 }
 }
 </script>
