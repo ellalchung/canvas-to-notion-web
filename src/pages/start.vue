@@ -50,11 +50,11 @@ export default {
     },
     data() {
         return {
-            component: 'InputCalLink',
+            component: 'NotionLogin',
             currentStep: 0,
             steps: [
-                {text: 'import assignments', component: "InputCalLink", icon: "fa-solid fa-file-import"},
                 {text: 'log into Notion', component: "NotionLogin", icon: "fa-solid fa-right-to-bracket"},
+                {text: 'import assignments', component: "InputCalLink", icon: "fa-solid fa-file-import"},
                 {text: 'edit', component: "RenameCourses", icon: "fa-solid fa-pen-to-square"}
             ],
         }
