@@ -7,7 +7,10 @@ export const useAuthStore = defineStore("authStore", {
             workspaceId: '',
             workspaceName: '',
             userId: '',
-            userName: ''
+            userName: '',
+            databaseId: '',
+            courses: Array(),
+            assignments: Array()
         }
     },
     actions: {
@@ -26,10 +29,28 @@ export const useAuthStore = defineStore("authStore", {
         setUserName(name: string) {
             this.userName=name;
         },
+        setDatabaseId(id: string) {
+            this.databaseId=id;
+        },
+        setCourses(courses: Array<string>) {
+            this.courses = courses;
+        },
+        setAssignments(assignments: Array<string>) {
+            this.assignments = assignments;
+        },
     },
     getters: {
         getPageId(): string {
             return this.pageId;
+        },
+        getDatabaseId(): string {
+            return this.databaseId
+        },
+        getCourses(): Array<string> {
+            return this.courses
+        },
+        getAssignments(): Array<string> {
+            return this.assignments
         },
         isAuthenticated(): boolean {
             return !!this.workspaceId;

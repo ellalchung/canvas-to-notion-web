@@ -31,18 +31,18 @@
 </template>
 
 <script>
+import { useAuthStore } from '@/stores/auth/authStore';
+
 export default {
     name: 'RenameCourses',
     data() {
         return {
-            items: [
-                'CHEM 51A SEC A',
-                'ICS 32 NASH',
-                'BIO 99 MOL BIO',
-                'ANTHRO 2A',
-                'WRITING 100 WILLIAMS'
-            ]
+            items: []
         }
+    },
+    mounted() {
+        const authStore = useAuthStore();
+        this.items = authStore.getCourses
     }
 }
 </script>

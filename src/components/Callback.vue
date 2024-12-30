@@ -22,12 +22,14 @@ export default {
       const userId = tokenResponse.data.owner.user.id;
       const workspaceId = tokenResponse.data.workspace_id;
       const workspaceName = tokenResponse.data.workspace_name;
+      const pageId = tokenResponse.data.duplicated_template_id;
 
       // Save the access token in store
       const authStore = useAuthStore();
       authStore.setUserId(userId);
       authStore.setWorkspaceId(workspaceId);
       authStore.setWorkspaceName(workspaceName);
+      authStore.setPageId(pageId);
 
       // Redirect to your main page after successful login
       this.$router.push('/start');
