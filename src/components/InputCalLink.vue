@@ -32,8 +32,8 @@ export default {
         goToHome() {
             this.$router.push("/");
         },
-        reset(val) {
-            if(!this.isComplete && (this.calLink != val)) {
+        onReset() {
+            if(this.isComplete) {
                 this.errorMessage = ""
                 this.courses = ""
                 this.assignments = ""
@@ -71,17 +71,14 @@ export default {
                 this.errorMessage = '';
                 this.loading = false;
                 this.isComplete = true;
-                console.log('done')
+
+                const authStore = useAuthStore();
+                this.courses = authStore.getCourses;
+                this.assignments = authStore.getAssignments;
             } catch (error) {
                 this.errorMessage = `error parsing assignmnets: ${error}`
             }
-        },
-        getCourseAssignments() {
-            const authStore = useAuthStore();
-            this.courses = authStore.getCourses;
-            this.assignments = authStore.getAssignments;
         }
-        
     },
 
 }

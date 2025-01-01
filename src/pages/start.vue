@@ -1,10 +1,3 @@
-<script setup lang="ts">
-import InputCalLink from '@/components/InputCalLink.vue';
-import NotionLogin from '@/components/NotionLogin.vue';
-import RenameCourses from '@/components/RenameCourses.vue';
-import Sidebar from '@/components/Sidebar.vue';
-</script>
-
 <template>
     <v-main class="bg">
         <v-container>
@@ -25,10 +18,10 @@ import Sidebar from '@/components/Sidebar.vue';
                         </keep-alive>
                         <div style="position: absolute; bottom: 0; left: 0; width: 100%;" class="pa-10">
                             <v-row>
-                                <v-col align="start">
+                                <v-col align="start" justify="center" class="pa-0">
                                     <v-btn @click="navigate(-1)" variant="text" prepend-icon="fa-light fa-arrow-left" class="text-none"> back </v-btn>
                                 </v-col>
-                                <v-col align="end">
+                                <v-col align="end" justify="center" class="pa-0">
                                     <v-btn @click="navigate(1)" variant="text" append-icon="fa-light fa-arrow-right" class="text-none"> next </v-btn>
                                 </v-col>
                             </v-row>
@@ -41,11 +34,18 @@ import Sidebar from '@/components/Sidebar.vue';
 </template>
 
 <script lang="ts">
+import InputCalLink from '@/components/InputCalLink.vue';
+import NotionLogin from '@/components/NotionLogin.vue';
+import RenameCourses from '@/components/RenameCourses.vue';
+import Sidebar from '@/components/Sidebar.vue';
+import Submit from '@/components/Submit.vue';
+
 export default {
     components: {
         InputCalLink,
         NotionLogin,
         RenameCourses,
+        Submit,
         Sidebar
     },
     data() {
@@ -55,7 +55,8 @@ export default {
             steps: [
                 {text: 'log into Notion', component: "NotionLogin", icon: "fa-solid fa-right-to-bracket"},
                 {text: 'import assignments', component: "InputCalLink", icon: "fa-solid fa-file-import"},
-                {text: 'edit', component: "RenameCourses", icon: "fa-solid fa-pen-to-square"}
+                {text: 'edit', component: "RenameCourses", icon: "fa-solid fa-pen-to-square"},
+                {text: 'submit', component: "Submit", icon: "fa-solid fa-circle-check"}
             ],
         }
     },

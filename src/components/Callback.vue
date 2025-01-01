@@ -12,7 +12,6 @@ export default {
   async mounted() {
     const queryParams = new URLSearchParams(window.location.search);
     const code = queryParams.get('code'); // Get authorization code from URL
-    console.log(code)
 
     if (code) {
       try {

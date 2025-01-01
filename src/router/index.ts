@@ -11,7 +11,7 @@ import { createRouter, createWebHistory } from 'vue-router/auto'
 
 
 const routes = [
-  {path: '/', component: () => import('@/pages/index.vue')},
+  {path: '/', component: () => import('@/pages/Home.vue')},
   {path: '/start', component: () => import('@/pages/start.vue')},
   {path: '/testing', component: Sidebar},
   {path: '/callback', component: Callback}

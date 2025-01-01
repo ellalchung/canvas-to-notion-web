@@ -5,7 +5,7 @@
                 <h1 class="py-4">start date</h1>
             </v-col>
             <v-col cols="9">
-                <v-date-input label="Date input" variant="outlined"></v-date-input>
+                <v-date-input v-model="startDate" label="Date input" variant="outlined"></v-date-input>
             </v-col>
         </v-row>
         <v-row>
@@ -14,18 +14,21 @@
         <div style="width: 100%; height: 70%; overflow: auto;">
             <v-row style="width: 100%;" class="py-6">
             <v-list style="width: 100%;">
-                <v-list-item v-for="item in items">
+                <v-list-item v-for="(item, index) in items" :key="index">
                     <v-row>
                         <v-col cols="6" class="py-7">
                         <v-list-item-title> {{ item }}</v-list-item-title>
                         </v-col>
                         <v-col cols="6">
-                            <v-text-field variant="outlined"></v-text-field>
+                            <v-text-field placeholder="course code" variant="outlined" v-model="inputRenamedCourses[index]"/>
                         </v-col>
                     </v-row>
                 </v-list-item>
             </v-list>
             </v-row>
+            <div v-if="items.length" class="d-flex justify-center">
+                <v-btn color="primary" class="text-none" @click="saveCourseNames">save</v-btn>
+            </div>
         </div>
     </div>
 </template>
@@ -37,12 +40,25 @@ export default {
     name: 'RenameCourses',
     data() {
         return {
-            items: []
+            startDate: null,
+            items: [],
+            courseMap: {},
+            renamedCourses: {},
+            inputRenamedCourses: {}
         }
     },
     mounted() {
         const authStore = useAuthStore();
-        this.items = authStore.getCourses
+        const courseMap = authStore.getCourses;
+        this.courseMap = courseMap;
+        this.items = Object.values(courseMap);
+    },
+    methods: {
+        saveCourseNames() {
+            this.renamedCourses = this.inputRenamedCourses;
+            const authStore = useAuthStore();
+            authStore.setCourses(this.renamedCourses);
+        }
     }
-}
+};
 </script>

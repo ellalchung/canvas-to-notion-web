@@ -9,8 +9,9 @@ export const useAuthStore = defineStore("authStore", {
             userId: '',
             userName: '',
             databaseId: '',
-            courses: Array(),
-            assignments: Array()
+            courses: new Map(),
+            assignments: new Array(),
+            startDate: new Date()
         }
     },
     actions: {
@@ -32,25 +33,31 @@ export const useAuthStore = defineStore("authStore", {
         setDatabaseId(id: string) {
             this.databaseId=id;
         },
-        setCourses(courses: Array<string>) {
+        setCourses(courses: Map<number,string>) {
             this.courses = courses;
         },
         setAssignments(assignments: Array<string>) {
             this.assignments = assignments;
         },
+        setStartDate(date: Date) {
+            this.startDate = date;
+        }
     },
     getters: {
         getPageId(): string {
             return this.pageId;
         },
         getDatabaseId(): string {
-            return this.databaseId
+            return this.databaseId;
         },
-        getCourses(): Array<string> {
-            return this.courses
+        getCourses(): Map<number,string> {
+            return this.courses;
         },
         getAssignments(): Array<string> {
-            return this.assignments
+            return this.assignments;
+        },
+        getStartDate(): Date {
+            return this.startDate;
         },
         isAuthenticated(): boolean {
             return !!this.workspaceId;

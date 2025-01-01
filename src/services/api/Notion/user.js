@@ -10,7 +10,6 @@ export async function getUserName() {
 
       const authStore = useAuthStore();
       authStore.setUserName(response.data)
-      console.log('User Name:', response.data)
     } catch (error) {
       console.error('Error fetching user name:', error);
     }

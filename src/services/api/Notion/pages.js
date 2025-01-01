@@ -1,13 +1,12 @@
 import { useAuthStore } from '@/stores/auth/authStore';
 import axios from 'axios';
 
-export async function createPage() {
+export async function createPage(assignment) {
     try {
-      const response = await axios.post('http://localhost:8000/page/create-page', {}, {
+      const response = await axios.post('http://localhost:8000/page/create-page', assignment, {
         withCredentials: true
       });
 
-      console.log('Page created:', response.data)
     } catch (error) {
       console.error('Error creating page:', error);
     }
@@ -21,13 +20,12 @@ export async function createDatabase(pageId) {
             { withCredentials: true }
         );
 
-        console.log('Database created:', response.data)
-
-        const databaseId = response.data.id;
+        const databaseId = response.data.data.id;
 
         const authstore = useAuthStore();
-        authstore.setDatabaseId(databaseId)
+        authstore.setDatabaseId(databaseId);
 
+        return databaseId;
     } catch (error) {
         console.error('Error creating database:', error)
     }
