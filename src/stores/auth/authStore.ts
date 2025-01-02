@@ -9,7 +9,8 @@ export const useAuthStore = defineStore("authStore", {
             userId: '',
             userName: '',
             databaseId: '',
-            courses: new Map(),
+            courses: new Array(),
+            courseMap: new Map(),
             assignments: new Array(),
             startDate: new Date()
         }
@@ -33,8 +34,11 @@ export const useAuthStore = defineStore("authStore", {
         setDatabaseId(id: string) {
             this.databaseId=id;
         },
-        setCourses(courses: Map<number,string>) {
+        setCourses(courses: Array<string>) {
             this.courses = courses;
+        },
+        setCourseMap(courses: Map<number,string>) {
+            this.courseMap = courses;
         },
         setAssignments(assignments: Array<string>) {
             this.assignments = assignments;
@@ -53,8 +57,11 @@ export const useAuthStore = defineStore("authStore", {
         getWorkspaceName(): string {
             return this.workspaceName;
         },
-        getCourses(): Map<number,string> {
+        getCourses(): Array<string> {
             return this.courses;
+        },
+        getCourseMap(): Map<number,string> {
+            return this.courseMap;
         },
         getAssignments(): Array<string> {
             return this.assignments;

@@ -27,7 +27,7 @@
             </v-list>
             </v-row>
             <div v-if="items.length" class="d-flex justify-center">
-                <v-btn color="primary" class="text-none" @click="saveCourseNames">save</v-btn>
+                <v-btn color="primary" class="text-none" @click="saveCourseNames" :disabled="!validSave">save</v-btn>
             </div>
         </div>
     </div>
@@ -45,26 +45,46 @@ export default {
             courseMap: {},
             renamedCourses: {},
             inputRenamedCourses: {},
-            savedInput: false
+            savedInput: false,
+            validSave: false
         }
     },
-    mounted() {
+    activated() {
         const authStore = useAuthStore();
-        const courseMap = authStore.getCourses;
+        const courseMap = authStore.getCourseMap;
         this.courseMap = courseMap;
         this.items = Object.values(courseMap);
+    },
+    watch: {
+        inputRenamedCourses: {
+            deep: true,
+            handler(newVal) {
+                console.log(this.inputRenamedCourses)
+                const renamedCoursesCount = Object.values(this.inputRenamedCourses).length;
+                const itemsLength = this.items.length;
+                this.validSave = (renamedCoursesCount == itemsLength)
+            }
+        }
     },
     methods: {
         saveCourseNames() {
             this.renamedCourses = this.inputRenamedCourses;
             const authStore = useAuthStore();
-            authStore.setCourses(this.renamedCourses);
+            authStore.setCourseMap(this.renamedCourses);
+            authStore.setCourses(Object.values(this.renamedCourses));
             authStore.setStartDate(this.startDate);
             this.savedInput = true;
         },
         validClickNext() {
             this.$emit('validNext', this.savedInput);
-        }
-    }
+        },
+        // validSave() {
+        //     const renamedCoursesCount = Object.values(this.inputRenamedCourses).length;
+        //     const itemsLength = this.items.length;
+        //     return (renamedCoursesCount == itemsLength)
+
+        // }
+    },
+    
 };
 </script>

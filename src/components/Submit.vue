@@ -46,20 +46,27 @@ export default {
             ]
         }
     },
-    mounted() {
+    activated() {
         const authStore = useAuthStore();
         this.startDate = authStore.getStartDate;
-        const courseMap = authStore.getCourses;
-        this.courses = Object.values(courseMap);
+        const courseMap = authStore.getCourseMap;
+        this.assignments = [];
 
         const assignments = authStore.getAssignments;
 
         for (let i = 0; i<assignments.length; i++){
-            const courseNumber = assignments[i].course;
-            const courseName = courseMap[courseNumber];
-            assignments[i].course = courseName;
+            console.log(assignments.length)
+            const dateObject = new Date(assignments[i].date)
+            if(this.startDate <= dateObject) {
+                const courseNumber = assignments[i].courseNo;
+                const courseName = courseMap[courseNumber];
+            
+                assignments[i].course = courseName;
+                console.log('assignments[i]', assignments[i])
+                this.assignments.push(assignments[i])
+            }
         }
-        this.assignments = assignments
+        console.log('subtmit', this.assignments)
     },
     methods: {
         async saveAssignments() {
@@ -69,7 +76,8 @@ export default {
             const databaseId = await createDatabase(pageId);
 
             for (let i = 0; i < this.assignments.length; i++) {
-                const assignment = this.assignments[i];
+                const { name, course, date } = this.assignments[i];
+                const assignment = { name, course, date }
                 await createPage({databaseId, ...assignment});
             }
         }

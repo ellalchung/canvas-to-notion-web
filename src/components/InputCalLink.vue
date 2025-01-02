@@ -27,8 +27,6 @@ export default {
     data: ()=> ({
         calLink: "",
         errorMessage: null,
-        courses: "",
-        assignments: "",
         isValidLink: false,
         loading: false,
         isComplete: false,
@@ -61,15 +59,9 @@ export default {
         onReset() {
             if(this.isComplete) {
                 this.errorMessage = ""
-                this.courses = ""
-                this.assignments = ""
                 this.isValidLink = false
                 this.loading = false
                 this.isComplete = false
-
-                const authStore = useAuthStore();
-                authStore.setAssignments(Array());
-                authStore.setCourses(Array());
             }
         },
         async parseAssignments() {
@@ -79,10 +71,6 @@ export default {
                 this.errorMessage = '';
                 this.loading = false;
                 this.isComplete = true;
-
-                const authStore = useAuthStore();
-                this.courses = authStore.getCourses;
-                this.assignments = authStore.getAssignments;
 
                 this.validClickNext()
             } catch (error) {

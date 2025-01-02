@@ -12,7 +12,7 @@ export async function parseAssignments(url) {
         const assignments = response.data.assignments;
 
         const authStore = useAuthStore();
-        authStore.setCourses(courses);
+        authStore.setCourseMap(courses);
         authStore.setAssignments(assignments);
     }
     catch(error){
