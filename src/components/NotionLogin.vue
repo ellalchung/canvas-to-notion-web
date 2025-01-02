@@ -1,8 +1,8 @@
 <template>
     <div align="center">
         <div v-if="isAuthenticated">
-            Welcome
-            <v-btn @click="createDatabase"></v-btn>
+            <h1> Welcome! </h1>
+            <h3> Access granted to {{ workspaceName }} </h3>
         </div>
         <div v-else>
             <h1>log into Notion</h1>
@@ -13,21 +13,24 @@
 
 <script>
 import { useAuthStore } from '@/stores/auth/authStore';
-import {createPage} from '@/services/api/Notion/pages';
-import { createDatabase } from '@/services/api/Notion/pages';
 
 export default {
     name: 'NotionLogin',
     data() {
         return {
             userName: '',
+            workspaceName: '',
             isAuth: false
         }
     },
     computed: {
         isAuthenticated() {
             const authStore = useAuthStore();
-            this.isAuth = true;
+            this.isAuth = authStore.isAuthenticated;
+            this.workspaceName = authStore.getWorkspaceName;
+
+            this.validClickNext()
+            
             return authStore.isAuthenticated;
         }
     },
@@ -38,13 +41,8 @@ export default {
             const notionAuthUrl = import.meta.env.VITE_APP_AUTH_URL;
             window.location.href = notionAuthUrl;
         },
-        createPage,
-        async createDatabase() {
-            const authStore = useAuthStore();
-            const pageId = authStore.getPageId;
-
-            await createDatabase(pageId);
-
+        validClickNext() {
+            this.$emit('validNext', this.isAuth)
         }
     }
 }

@@ -50,6 +50,9 @@ export const useAuthStore = defineStore("authStore", {
         getDatabaseId(): string {
             return this.databaseId;
         },
+        getWorkspaceName(): string {
+            return this.workspaceName;
+        },
         getCourses(): Map<number,string> {
             return this.courses;
         },

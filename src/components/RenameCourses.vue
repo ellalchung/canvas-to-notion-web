@@ -44,7 +44,8 @@ export default {
             items: [],
             courseMap: {},
             renamedCourses: {},
-            inputRenamedCourses: {}
+            inputRenamedCourses: {},
+            savedInput: false
         }
     },
     mounted() {
@@ -58,6 +59,11 @@ export default {
             this.renamedCourses = this.inputRenamedCourses;
             const authStore = useAuthStore();
             authStore.setCourses(this.renamedCourses);
+            authStore.setStartDate(this.startDate);
+            this.savedInput = true;
+        },
+        validClickNext() {
+            this.$emit('validNext', this.savedInput);
         }
     }
 };

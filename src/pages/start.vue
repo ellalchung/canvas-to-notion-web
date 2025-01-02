@@ -14,16 +14,18 @@
                 <v-col cols="9">
                     <v-card elevation="12" class="centered-content rounded-xl" height="70vh">
                         <keep-alive>
-                            <component :is="component" />
+                            <component :is="component" @validNext="handleValidNext" />
                         </keep-alive>
                         <div style="position: absolute; bottom: 0; left: 0; width: 100%;" class="pa-10">
                             <v-row>
                                 <v-col align="start" justify="center" class="pa-0">
                                     <v-btn @click="navigate(-1)" variant="text" prepend-icon="fa-light fa-arrow-left" class="text-none"> back </v-btn>
                                 </v-col>
+                                <div v-if="currentStep!=3">
                                 <v-col align="end" justify="center" class="pa-0">
-                                    <v-btn @click="navigate(1)" variant="text" append-icon="fa-light fa-arrow-right" class="text-none"> next </v-btn>
+                                    <v-btn @click="navigate(1)" variant="text" append-icon="fa-light fa-arrow-right" class="text-none" :disabled="!validNext"> next </v-btn>
                                 </v-col>
+                                </div>
                             </v-row>
                         </div>
                     </v-card>
@@ -53,11 +55,12 @@ export default {
             component: 'NotionLogin',
             currentStep: 0,
             steps: [
-                {text: 'log into Notion', component: "NotionLogin", icon: "fa-solid fa-right-to-bracket"},
-                {text: 'import assignments', component: "InputCalLink", icon: "fa-solid fa-file-import"},
-                {text: 'edit', component: "RenameCourses", icon: "fa-solid fa-pen-to-square"},
-                {text: 'submit', component: "Submit", icon: "fa-solid fa-circle-check"}
+                {text: 'log into Notion', component: "NotionLogin", icon: "fa-solid fa-right-to-bracket", show: true},
+                {text: 'import assignments', component: "InputCalLink", icon: "fa-solid fa-file-import", show: false},
+                {text: 'edit', component: "RenameCourses", icon: "fa-solid fa-pen-to-square", show: false},
+                {text: 'submit', component: "Submit", icon: "fa-solid fa-circle-check", show: false}
             ],
+            validNext: false
         }
     },
     methods: {
@@ -77,6 +80,12 @@ export default {
         updateStep(index: number) {
             this.currentStep=index;
             this.component=this.steps[this.currentStep].component;
+        },
+        handleValidNext(display: boolean) {
+            this.validNext = display;
+            if (this.currentStep + 1 < this.steps.length) {
+                this.steps[this.currentStep + 1].show = display;
+            }
         }
 }
 }

@@ -4,6 +4,7 @@
           v-for="(step, i) in steps"
           :key="i"
           :value="step"
+          :disabled="!step.show"
           color="primary"
           :active="currentStep == i"
           @click="selectStep(i)">
