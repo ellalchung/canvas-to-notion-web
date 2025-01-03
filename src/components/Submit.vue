@@ -55,7 +55,6 @@ export default {
         const assignments = authStore.getAssignments;
 
         for (let i = 0; i<assignments.length; i++){
-            console.log(assignments.length)
             const dateObject = new Date(assignments[i].date)
             if(this.startDate <= dateObject) {
                 const courseNumber = assignments[i].courseNo;
@@ -66,7 +65,6 @@ export default {
                 this.assignments.push(assignments[i])
             }
         }
-        console.log('subtmit', this.assignments)
     },
     methods: {
         async saveAssignments() {

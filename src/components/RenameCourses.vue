@@ -54,15 +54,15 @@ export default {
         const courseMap = authStore.getCourseMap;
         this.courseMap = courseMap;
         this.items = Object.values(courseMap);
+        this.validClickNext()
     },
     watch: {
         inputRenamedCourses: {
             deep: true,
             handler(newVal) {
-                console.log(this.inputRenamedCourses)
-                const renamedCoursesCount = Object.values(this.inputRenamedCourses).length;
+                const renamedCoursesCount = Object.values(this.inputRenamedCourses).filter(value => value !== "").length;
                 const itemsLength = this.items.length;
-                this.validSave = (renamedCoursesCount == itemsLength)
+                this.validSave = (renamedCoursesCount == itemsLength) && !!this.startDate
             }
         }
     },
@@ -74,17 +74,11 @@ export default {
             authStore.setCourses(Object.values(this.renamedCourses));
             authStore.setStartDate(this.startDate);
             this.savedInput = true;
+            this.validClickNext()
         },
         validClickNext() {
             this.$emit('validNext', this.savedInput);
-        },
-        // validSave() {
-        //     const renamedCoursesCount = Object.values(this.inputRenamedCourses).length;
-        //     const itemsLength = this.items.length;
-        //     return (renamedCoursesCount == itemsLength)
-
-        // }
+        }
     },
-    
 };
 </script>
