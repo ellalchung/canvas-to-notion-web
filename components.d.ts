@@ -8,6 +8,8 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Callback: typeof import('./src/components/Callback.vue')['default']
+    GettingStarted: typeof import('./src/components/GettingStarted.vue')['default']
+    GettingStartedInit: typeof import('./src/components/GettingStartedInit.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     Home: typeof import('./src/components/Home.vue')['default']
     InputCalLink: typeof import('./src/components/InputCalLink.vue')['default']
@@ -15,6 +17,7 @@ declare module 'vue' {
     RenameCourses: typeof import('./src/components/RenameCourses.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Search: typeof import('./src/components/Search.vue')['default']
     Sidebar: typeof import('./src/components/Sidebar.vue')['default']
     Submit: typeof import('./src/components/Submit.vue')['default']
   }
