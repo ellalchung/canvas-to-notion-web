@@ -20,7 +20,6 @@
 
 <script>
 import { parseAssignments } from '../services/api/icalParser.js';
-import { useAuthStore } from '@/stores/auth/authStore';
 
 export default {
     name: 'InputCalLink',

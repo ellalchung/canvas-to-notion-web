@@ -61,7 +61,6 @@ export default {
                 const courseName = courseMap[courseNumber];
             
                 assignments[i].course = courseName;
-                console.log('assignments[i]', assignments[i])
                 this.assignments.push(assignments[i])
             }
         }
@@ -71,8 +70,9 @@ export default {
             const authStore = useAuthStore();
 
             const pageId = authStore.getPageId;
-            const databaseId = await createDatabase(pageId);
 
+            const databaseId = authStore.getDatabaseId || await createDatabase(pageId)
+            
             for (let i = 0; i < this.assignments.length; i++) {
                 const { name, course, date } = this.assignments[i];
                 const assignment = { name, course, date }
