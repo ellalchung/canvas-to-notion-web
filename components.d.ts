@@ -7,7 +7,9 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AddToTemplate: typeof import('./src/components/AddToTemplate.vue')['default']
     Callback: typeof import('./src/components/Callback.vue')['default']
+    CreateNewTemplate: typeof import('./src/components/CreateNewTemplate.vue')['default']
     GettingStarted: typeof import('./src/components/GettingStarted.vue')['default']
     GettingStartedInit: typeof import('./src/components/GettingStartedInit.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']

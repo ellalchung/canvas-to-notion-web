@@ -12,11 +12,11 @@
                 </v-col>
 
                 <v-col cols="9">
-                    <v-card elevation="12" class="centered-content rounded-xl" height="70vh">
-                        <keep-alive>
-                            <component :is="component" @validNext="handleValidNext" />
-                        </keep-alive>
-                        <div style="position: absolute; bottom: 0; left: 0; width: 100%;" class="pa-10">
+                    <v-card elevation="12" class="centered-content rounded-xl" style="height: 70vh;" >
+                            <keep-alive>
+                                <component :is="component" @validNext="handleValidNext" />
+                            </keep-alive>
+                        <div style="position: absolute; bottom: 0; left: 0; width: 100%;" class="px-10 pb-10">
                             <v-row>
                                 <v-col align="start" justify="center" class="pa-0">
                                     <v-btn @click="navigate(-1)" variant="text" prepend-icon="fa-light fa-arrow-left" class="text-none"> back </v-btn>
@@ -36,6 +36,7 @@
 </template>
 
 <script lang="ts">
+import GettingStarted from '@/components/GettingStarted.vue';
 import InputCalLink from '@/components/InputCalLink.vue';
 import NotionLogin from '@/components/NotionLogin.vue';
 import RenameCourses from '@/components/RenameCourses.vue';
@@ -48,14 +49,16 @@ export default {
         NotionLogin,
         RenameCourses,
         Submit,
+        GettingStarted,
         Sidebar
     },
     data() {
         return {
-            component: 'NotionLogin',
+            component: 'GettingStarted',
             currentStep: 0,
             steps: [
-                {text: 'log into Notion', component: "NotionLogin", icon: "fa-solid fa-right-to-bracket", show: true},
+                {text: 'getting started', component: "GettingStarted", icon: "fa-solid fa-right-to-bracket", show: true},
+                {text: 'log into Notion', component: "NotionLogin", icon: "fa-solid fa-right-to-bracket", show: false},
                 {text: 'import assignments', component: "InputCalLink", icon: "fa-solid fa-file-import", show: false},
                 {text: 'edit', component: "RenameCourses", icon: "fa-solid fa-pen-to-square", show: false},
                 {text: 'submit', component: "Submit", icon: "fa-solid fa-circle-check", show: false}

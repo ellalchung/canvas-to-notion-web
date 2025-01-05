@@ -8,12 +8,13 @@
 import Sidebar from '@/components/Sidebar.vue'
 import Callback from '@/components/Callback.vue'
 import { createRouter, createWebHistory } from 'vue-router/auto'
+import GettingStarted from '@/components/GettingStarted.vue'
 
 
 const routes = [
   {path: '/', component: () => import('@/pages/Home.vue')},
   {path: '/start', component: () => import('@/pages/start.vue')},
-  {path: '/testing', component: Sidebar},
+  {path: '/testing', component: GettingStarted},
   {path: '/callback', component: Callback}
 ]
 
