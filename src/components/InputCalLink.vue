@@ -43,6 +43,9 @@ export default {
             }
         }
     }),
+    activated() {
+        this.validClickNext();
+    },
     watch: {
         calLink(value) {
             this.isValidLink = this.rules.checkLink(value) == true;

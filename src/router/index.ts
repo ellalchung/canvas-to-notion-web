@@ -13,7 +13,8 @@ import GettingStarted from '@/components/GettingStarted.vue'
 
 const routes = [
   {path: '/', component: () => import('@/pages/Home.vue')},
-  {path: '/start', component: () => import('@/pages/start.vue')},
+  {path: '/getting-started', component: () => import('@/pages/gettingStarted.vue')},
+  {path: '/setup', component: () => import('@/pages/setup.vue')},
   {path: '/testing', component: GettingStarted},
   {path: '/callback', component: Callback}
 ]

@@ -31,7 +31,7 @@ export default {
       authStore.setPageId(pageId);
 
       // Redirect to your main page after successful login
-      this.$router.push('/start');
+      this.$router.push('/setup');
     } catch (error) {
       console.error('Error during token exchange:', error);
     }

@@ -13,15 +13,15 @@
 
                 <v-col cols="9">
                     <v-card elevation="12" class="centered-content rounded-xl" style="height: 70vh;" >
-                            <keep-alive>
-                                <component :is="component" @validNext="handleValidNext" />
-                            </keep-alive>
+                        <keep-alive>
+                            <component :is="component" @validNext="handleValidNext" />
+                        </keep-alive>
                         <div style="position: absolute; bottom: 0; left: 0; width: 100%;" class="px-10 pb-10">
                             <v-row>
                                 <v-col align="start" justify="center" class="pa-0">
                                     <v-btn @click="navigate(-1)" variant="text" prepend-icon="fa-light fa-arrow-left" class="text-none"> back </v-btn>
                                 </v-col>
-                                <div v-if="currentStep!=3">
+                                <div v-if="currentStep!=4">
                                 <v-col align="end" justify="center" class="pa-0">
                                     <v-btn @click="navigate(1)" variant="text" append-icon="fa-light fa-arrow-right" class="text-none" :disabled="!validNext"> next </v-btn>
                                 </v-col>
@@ -54,11 +54,11 @@ export default {
     },
     data() {
         return {
-            component: 'GettingStarted',
-            currentStep: 0,
+            component: 'NotionLogin',
+            currentStep: 1,
             steps: [
                 {text: 'getting started', component: "GettingStarted", icon: "fa-solid fa-right-to-bracket", show: true},
-                {text: 'log into Notion', component: "NotionLogin", icon: "fa-solid fa-right-to-bracket", show: false},
+                {text: 'log into Notion', component: "NotionLogin", icon: "fa-solid fa-right-to-bracket", show: true},
                 {text: 'import assignments', component: "InputCalLink", icon: "fa-solid fa-file-import", show: false},
                 {text: 'edit', component: "RenameCourses", icon: "fa-solid fa-pen-to-square", show: false},
                 {text: 'submit', component: "Submit", icon: "fa-solid fa-circle-check", show: false}
@@ -108,6 +108,7 @@ export default {
     flex-direction: column; /* Stack vertically */
     position: relative;
     z-index: 1;
+    overflow: hidden;
 }
 .image-layer {
     position: absolute;
