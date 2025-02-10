@@ -5,7 +5,15 @@
                 <h1 class="py-2">start date</h1>
             </v-col>
             <v-col cols="9">
-                <v-date-input v-model="startDate" label="Date input" variant="outlined"></v-date-input>
+                <div class="d-flex align-center">
+                    <v-date-input v-model="startDate" label="Date input" hide-details variant="outlined"></v-date-input>
+                    <v-tooltip v-model="showTooltip">
+                        <template v-slot:activator="{ props }">
+                            <v-icon v-bind="props" color="gray" icon="fa-light fa-info"></v-icon>
+                        </template>
+                        <span>The start date is the earliest date the calendar will use to search for assignments.<br>Recommended: Set the start date as your earliest incomplete assignment.</span>
+                    </v-tooltip>
+                </div>
             </v-col>
         </v-row>
         <h1 class="py-2">rename courses</h1>
@@ -44,7 +52,8 @@ export default {
             renamedCourses: {},
             inputRenamedCourses: {},
             savedInput: false,
-            validSave: false
+            validSave: false,
+            showTooltip: false
         }
     },
     activated() {
