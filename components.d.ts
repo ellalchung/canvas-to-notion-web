@@ -10,6 +10,7 @@ declare module 'vue' {
     AddToTemplate: typeof import('./src/components/AddToTemplate.vue')['default']
     Callback: typeof import('./src/components/Callback.vue')['default']
     CreateNewTemplate: typeof import('./src/components/CreateNewTemplate.vue')['default']
+    Done: typeof import('./src/components/Done.vue')['default']
     GettingStarted: typeof import('./src/components/GettingStarted.vue')['default']
     GettingStartedInit: typeof import('./src/components/GettingStartedInit.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
