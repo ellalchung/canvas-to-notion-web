@@ -14,7 +14,8 @@
                 </v-card-subtitle>
             </v-card-item>
         </v-card>
-        <v-spacer class="pa-4"/>
+        <!-- Not valid option yet -->
+        <!-- <v-spacer class="pa-4"/>
         <v-card @click="selectAddTo" align="start" class="glow-card" variant="outlined" width="400px">
             <v-card-item>
                 <v-card-title>
@@ -25,7 +26,7 @@
                     existing database.
                 </v-card-subtitle>
             </v-card-item>
-        </v-card>
+        </v-card> -->
     </div>
 </v-container>
 </template>
