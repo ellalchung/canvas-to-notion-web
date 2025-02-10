@@ -26,7 +26,7 @@
 export default {
     methods: {
         goToStart() {
-            this.$router.push("/start");
+            this.$router.push("/getting-started");
         }
     }
 };

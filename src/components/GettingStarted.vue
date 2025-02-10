@@ -1,12 +1,22 @@
 <template>
     <div v-if="currentStep === 'GettingStartedInit'">
-        <GettingStartedInit/>
+        <GettingStartedInit @selectOption="selectOption"/>
     </div>
+
+    <div v-if="currentStep === 'CreateNewTemplate'">
+        <CreateNewTemplate/>
+    </div>
+
+    <div v-if="currentStep === 'AddToTemplate'">
+        <AddToTemplate/>
+    </div>
+    
 </template>
 
 <script lang="ts">
-import { components } from 'vuetify/dist/vuetify-labs.js';
 import GettingStartedInit from './GettingStartedInit.vue';
+import CreateNewTemplate from './CreateNewTemplate.vue';
+import AddToTemplate from './AddToTemplate.vue';
 
 export default {
     name: "GettingStarted",
@@ -19,6 +29,7 @@ export default {
     methods: {
         selectOption(option: string) {
             this.currentStep = option;
+            this.$emit('validNext', true)
         }
     }
 }
