@@ -1,22 +1,20 @@
 <template>
-    <div style="width: 80%; height: 80%; top: 0;" justify="center">
+    <div class="main-container">
         <v-row>
-            <v-col class="pa-0" cols="3">
-                <h1 class="py-4">start date</h1>
+            <v-col cols="3">
+                <h1 class="py-2">start date</h1>
             </v-col>
             <v-col cols="9">
                 <v-date-input v-model="startDate" label="Date input" variant="outlined"></v-date-input>
             </v-col>
         </v-row>
-        <v-row>
-            <h1>rename courses</h1>
-        </v-row>
-        <div style="width: 100%; height: 70%; overflow: auto;">
-            <v-row style="width: 100%;" class="py-6">
+        <h1 class="py-2">rename courses</h1>
+        <div class="content-container">
+            <v-row style="width: 100%;">
             <v-list style="width: 100%;">
                 <v-list-item v-for="(item, index) in items" :key="index">
                     <v-row>
-                        <v-col cols="6" class="py-7">
+                        <v-col cols="6">
                         <v-list-item-title> {{ item }}</v-list-item-title>
                         </v-col>
                         <v-col cols="6">
@@ -26,9 +24,9 @@
                 </v-list-item>
             </v-list>
             </v-row>
-            <div v-if="items.length" class="d-flex justify-center">
-                <v-btn color="primary" class="text-none" @click="saveCourseNames" :disabled="!validSave">save</v-btn>
-            </div>
+        </div>
+        <div class="d-flex justify-center">
+            <v-btn color="primary" class="text-none ma-2" @click="saveCourseNames" :disabled="!validSave">save</v-btn>
         </div>
     </div>
 </template>
@@ -82,3 +80,16 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+.main-container {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    width: 80%;
+}
+
+.content-container {
+    overflow-y: auto;
+}
+</style>
