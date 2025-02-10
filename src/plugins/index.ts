@@ -5,8 +5,8 @@
  */
 
 // Plugins
-import vuetify from './vuetify'
-import router from '../router'
+import vuetify from './vuetify.js'
+import router from '../router/index.js'
 
 // Types
 import type { App } from 'vue'

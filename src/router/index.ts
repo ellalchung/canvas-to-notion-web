@@ -7,7 +7,7 @@
 // Composables
 import Sidebar from '@/components/Sidebar.vue'
 import Callback from '@/components/Callback.vue'
-import { createRouter, createWebHistory } from 'vue-router/auto'
+import { createRouter, createWebHistory, type RouteLocation } from 'vue-router/auto'
 import GettingStarted from '@/components/GettingStarted.vue'
 
 
@@ -25,7 +25,7 @@ const router = createRouter({
 })
 
 // Workaround for https://github.com/vitejs/vite/issues/11804
-router.onError((err, to) => {
+router.onError((err: Error, to: RouteLocation) => {
   if (err?.message?.includes?.('Failed to fetch dynamically imported module')) {
     if (!localStorage.getItem('vuetify:dynamic-reload')) {
       console.log('Reloading page to fix dynamic import error')
