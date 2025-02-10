@@ -4,7 +4,8 @@ import axios from 'axios';
 export async function getUserName() {
     // unused right now
     try {
-      const response = await axios.get('http://localhost:8000/user/name', {
+      const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
+      const response = await axios.get(`${serverUrl}/user/name`, {
         withCredentials: true
       });
 

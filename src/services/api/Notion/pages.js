@@ -3,7 +3,8 @@ import axios from 'axios';
 
 export async function createPage(assignment) {
     try {
-      const response = await axios.post('http://localhost:8000/page/create-page', assignment, {
+      const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
+      const response = await axios.post(`${serverUrl}/page/create-page`, assignment, {
         withCredentials: true
       });
 
@@ -15,7 +16,8 @@ export async function createPage(assignment) {
 
 export async function createDatabase(pageId) {
     try {
-        const response = await axios.post('http://localhost:8000/page/create-database', 
+        const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
+        const response = await axios.post(`${serverUrl}/page/create-database`, 
             { pageId: pageId }, 
             { withCredentials: true }
         );

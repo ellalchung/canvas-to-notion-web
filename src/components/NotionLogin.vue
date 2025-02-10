@@ -36,8 +36,6 @@ export default {
     },
     methods: {
         redirectToNotionAuth() {
-            const clientId = import.meta.env.VITE_APP_NOTION_CLIENT_ID;
-            const redirectUri = 'http://localhost:3000/callback';
             const notionAuthUrl = import.meta.env.VITE_APP_AUTH_URL;
             window.location.href = notionAuthUrl;
         },

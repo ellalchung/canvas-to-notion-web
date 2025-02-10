@@ -4,7 +4,8 @@ import axios from 'axios';
 
 export async function parseAssignments(url) {
     try {
-        const response = await axios.post('http://localhost:8000/cal/parse-assignments',
+        const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
+        const response = await axios.post(`${serverUrl}/cal/parse-assignments`,
             { url: url }, 
             { withCredentials: true });
 

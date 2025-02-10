@@ -15,7 +15,8 @@ export default {
 
     if (code) {
       try {
-      const tokenResponse = await axios.post('http://localhost:8000/auth/exchange-token', {
+      const serverUrl = import.meta.env.VITE_APP_SERVER_URL;
+      const tokenResponse = await axios.post(`${serverUrl}/auth/exchange-token`, {
         code: code}, {withCredentials: true});
 
       const userId = tokenResponse.data.owner.user.id;
