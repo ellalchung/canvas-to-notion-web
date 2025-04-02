@@ -5,7 +5,6 @@
  */
 
 // Composables
-import Sidebar from '@/components/Sidebar.vue'
 import Callback from '@/components/Callback.vue'
 import { createRouter, createWebHistory, type RouteLocation } from 'vue-router/auto'
 import GettingStarted from '@/components/GettingStarted.vue'
