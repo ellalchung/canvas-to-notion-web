@@ -109,7 +109,7 @@ export default {
 }
 
 .bg {
-    background-image: url('gradient-background.png');
+    background-image: url('/gradient-background.png');
     background-size: cover;
 }
 </style>
