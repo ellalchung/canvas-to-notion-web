@@ -4,22 +4,22 @@
             <h1>canvas calendar link</h1>
             <v-text-field 
             clearable
-            :rules="[rules.checkLink]"
+            :rules="rules"
+            :error="!!errorMessage"
+            :error-messages="errorMessage ? [errorMessage] : []"
             hint="Open Canvas, navigate to your Calendar, select on 'Calendar Feed', and paste the calendar link here"
             v-model="calLink"
             variant="outlined"/>
         </div>
     <v-btn color="primary" class="text-none" :loading="loading" :disabled="!isValidLink" @click="parseAssignments" width="20%">
-        <template v-slot:default>
-            <v-icon v-if="isComplete">fa-solid fa-check</v-icon>
-            <span v-else>confirm</span>
-        </template>
+        confirm
     </v-btn>
     </div>
 </template>
 
 <script>
 import { parseAssignments } from '../services/api/icalParser.js';
+import { useAuthStore } from '@/stores/auth/authStore';
 
 export default {
     name: 'InputCalLink',
@@ -29,54 +29,59 @@ export default {
         isValidLink: false,
         loading: false,
         isComplete: false,
-        rules: {
-            checkLink: value => {
-                const canvasDomain = 'canvas.eee.uci.edu';
-                if (value == false) return 'required'; 
-                if (!value.includes(canvasDomain)) {
-                    return 'Please use a Canvas calendar link.';
-                    }
-                if (!value.includes('.ics')) {
-                    return 'Invalid Canvas calendar link structure (not an .ics file).';
-                    }
-                return true;
-            }
-        }
     }),
     activated() {
         this.validClickNext();
     },
     watch: {
         calLink(value) {
-            this.isValidLink = this.rules.checkLink(value) == true;
+            if (this.errorMessage) {
+                this.errorMessage = null;
+            }
+
+            const results = this.rules.map(rule => rule(value));
+            this.isValidLink = results.every(r => r === true);
         }
     },
     mounted() {
         this.validClickNext();
     },
+    computed: {
+        rules() {
+            const canvasDomain = "canvas.eee.uci.edu";
+            return [
+                value => !!value || "Required",
+                value => value.includes(canvasDomain) || "Please use a Canvas calendar link.",
+                value => value.includes(".ics") || "Invalid Canvas calendar link structure (not an .ics file).",
+            ];
+        },
+    },
     methods: {
         goToHome() {
             this.$router.push("/");
-        },
-        onReset() {
-            if(this.isComplete) {
-                this.errorMessage = ""
-                this.isValidLink = false
-                this.loading = false
-                this.isComplete = false
-            }
         },
         async parseAssignments() {
             this.loading = true;
             try {
                 await parseAssignments(this.calLink);
-                this.errorMessage = '';
-                this.loading = false;
-                this.isComplete = true;
+                const authStore = useAuthStore();
 
-                this.validClickNext()
+                if(authStore.getCourseMap) {
+                    this.errorMessage = '';
+                    this.loading = false;
+                    this.isComplete = true;
+
+                    this.validClickNext()
+                } else {
+                    this.errorMessage = 'No assignments found in the calendar link. Please check the link and try again.';
+                    this.loading = false;
+                    this.isComplete = false;
+                    this.isValidLink = false;
+                }
             } catch (error) {
-                this.errorMessage = `error parsing assignmnets: ${error}`
+                this.loading = false;
+                this.isValidLink = false;
+                this.errorMessage = `Invalid calendar link or no assignments found. Please check the link and try again.`;
             }
         },
         validClickNext() {

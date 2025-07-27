@@ -9,6 +9,9 @@ export async function parseAssignments(url) {
             { url: url }, 
             { withCredentials: true });
 
+        if(response.status !== 200) {
+            throw new Error(`Failed to parse assignments: ${response.statusText}`);
+        }
         const courses = response.data.courses;
         const assignments = response.data.assignments;
 
@@ -18,5 +21,6 @@ export async function parseAssignments(url) {
     }
     catch(error){
         console.error('Error parsing assignments', error);
+        throw new Error(`Error parsing assignments: ${error.message}`);
     }
 };
