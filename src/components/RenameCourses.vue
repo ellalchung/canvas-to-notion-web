@@ -6,13 +6,13 @@
         <div class="content">
             <div class="start-date">
                 <h2>start date</h2>
+                <v-date-input v-model="startDate" label="date input" hide-details variant="outlined"></v-date-input>
                 <v-tooltip v-model="showTooltip">
                     <template v-slot:activator="{ props }">
-                        <v-icon class="mdi" v-bind="props" color="gray" :icon="'mdi-information'"></v-icon>
+                        <v-icon class="mdi" v-bind="props" color="gray" :icon="'mdi-help-circle'"></v-icon>
                     </template>
                     <span>Choose the date to start tracking assignments.<br>Recommended: Set the start date as your earliest incomplete assignment.</span>
                 </v-tooltip>
-                <v-date-input v-model="startDate" label="date input" hide-details variant="outlined"></v-date-input>
             </div>
             <div class="course-names">
                 <h2>rename courses</h2>
