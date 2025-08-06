@@ -14,17 +14,9 @@
                 <v-col cols="9">
                     <v-card elevation="12" class="centered-content rounded-xl" style="height: 70vh;" >
                             <GettingStarted/>
-                        <div style="position: absolute; bottom: 0; left: 0; width: 100%;" class="px-10 pb-10">
-                            <v-row>
-                                <v-col align="start" justify="center" class="pa-0">
-                                    <v-btn @click="goToHome" variant="text" prepend-icon="fa-light fa-arrow-left" class="text-none"> back </v-btn>
-                                </v-col>
-                                <div v-if="currentStep!=3">
-                                <v-col align="end" justify="center" class="pa-0">
-                                    <v-btn @click="goToSetup" variant="text" append-icon="fa-light fa-arrow-right" class="text-none"> next </v-btn>
-                                </v-col>
-                                </div>
-                            </v-row>
+                        <div style="position: absolute; bottom: 0; left: 0; width: 100%;" class="navigation-buttons">
+                            <v-btn @click="goToHome" variant="text" prepend-icon="fa-light fa-arrow-left" class="text-none"> back </v-btn>
+                            <v-btn @click="goToSetup" variant="text" append-icon="fa-light fa-arrow-right" class="text-none"> next </v-btn>
                         </div>
                     </v-card>
                 </v-col>
@@ -94,9 +86,9 @@ export default {
 }
 .centered-content {
     display: flex;
-    justify-content: center; /* Horizontal centering */
-    align-items: center;     /* Vertical centering */
-    flex-direction: column; /* Stack vertically */
+    justify-content: center; 
+    align-items: center;     
+    flex-direction: column;
     position: relative;
     z-index: 1;
 }
@@ -111,5 +103,11 @@ export default {
 .bg {
     background-image: url('/gradient-background.png');
     background-size: cover;
+}
+
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
 }
 </style>

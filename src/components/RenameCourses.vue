@@ -1,53 +1,46 @@
 <template>
-    <div class="main-container">
-        <v-row>
-            <v-col cols="3">
-                <h1 class="py-2">start date</h1>
-            </v-col>
-            <v-col cols="9">
-                <div class="d-flex align-center">
-                    <v-date-input v-model="startDate" label="Date input" hide-details variant="outlined"></v-date-input>
-                    <v-tooltip v-model="showTooltip">
-                        <template v-slot:activator="{ props }">
-                            <v-icon v-bind="props" color="gray" icon="fa-light fa-info"></v-icon>
-                        </template>
-                        <span>The start date is the earliest date the calendar will use to search for assignments.<br>Recommended: Set the start date as your earliest incomplete assignment.</span>
-                    </v-tooltip>
-                </div>
-            </v-col>
-        </v-row>
-        <h1 class="py-2">rename courses</h1>
-        <div class="content-container">
-            <v-row style="width: 100%;">
-            <v-list style="width: 100%;">
+    <div class="rename-courses">
+        <div class="header">
+            <h1>clean things up</h1>
+        </div>
+        <div class="content">
+            <div class="start-date">
+                <h2>start date</h2>
+                <v-tooltip v-model="showTooltip">
+                    <template v-slot:activator="{ props }">
+                        <v-icon class="mdi" v-bind="props" color="gray" :icon="'mdi-information'"></v-icon>
+                    </template>
+                    <span>Choose the date to start tracking assignments.<br>Recommended: Set the start date as your earliest incomplete assignment.</span>
+                </v-tooltip>
+                <v-date-input v-model="startDate" label="date input" hide-details variant="outlined"></v-date-input>
+            </div>
+            <div class="course-names">
+                <h2>rename courses</h2>
                 <v-list-item v-for="(item, index) in items" :key="index">
-                    <v-row>
-                        <v-col cols="6">
-                        <v-list-item-title> {{ item }}</v-list-item-title>
-                        </v-col>
-                        <v-col cols="6">
-                            <v-text-field placeholder="course code" variant="outlined" v-model="inputRenamedCourses[index]"/>
-                        </v-col>
-                    </v-row>
+                    <v-list-item-title> {{ item }}</v-list-item-title>
+                    <v-text-field
+                        :key="index"
+                        v-model="inputRenamedCourses[index]"
+                        placeholder="course code"
+                        variant="outlined"
+                        clearable
+                    ></v-text-field>
                 </v-list-item>
-            </v-list>
-            </v-row>
+            </div>
         </div>
-        <div class="d-flex justify-center">
-            <v-btn color="primary" class="text-none ma-2" @click="saveCourseNames" :disabled="!validSave">save</v-btn>
-        </div>
+        <v-btn color="primary" class="confirm-btn" @click="saveCourseNames" :disabled="!validSave">save</v-btn>
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import { useAuthStore } from '@/stores/auth/authStore';
 
 export default {
     name: 'RenameCourses',
     data() {
         return {
-            startDate: null,
-            items: [],
+            startDate: new Date(),
+            items: [] as Map<number, string>[],
             courseMap: {},
             renamedCourses: {},
             inputRenamedCourses: {},
@@ -61,6 +54,7 @@ export default {
         const courseMap = authStore.getCourseMap;
         this.courseMap = courseMap;
         this.items = Object.values(courseMap);
+
         this.validClickNext()
     },
     watch: {
@@ -87,18 +81,52 @@ export default {
             this.$emit('validNext', this.savedInput);
         }
     },
-};
+}
 </script>
 
 <style scoped>
-.main-container {
+.rename-courses {
     display: flex;
     flex-direction: column;
-    height: 80%;
+    justify-content: start;
+    align-items: center;
+    width: 90%;
+    height: 100%;
+    margin-top: 32px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    height: 70%;
     width: 80%;
 }
 
-.content-container {
-    overflow-y: auto;
+.header {
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    p {
+        font-size: 1rem;
+    }
+}
+
+.start-date {
+    display: flex;
+    align-items: center;
+    padding-top: 16px;
+    gap: 16px;
+    h2 {
+        font-size: 1.5rem;
+        margin-right: 0.5rem;
+    }
+}
+
+.confirm-btn {
+    margin-top: 16px;
+    width: 80%;
+    text-transform: lowercase;
 }
 </style>

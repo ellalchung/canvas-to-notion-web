@@ -12,21 +12,15 @@
                 </v-col>
 
                 <v-col cols="9">
-                    <v-card elevation="12" class="centered-content rounded-xl" style="height: 70vh;" >
+                    <v-card elevation="12" class="main-content centered-content rounded-xl" style="height: 70vh;" >
                         <keep-alive>
                             <component :is="component" @validNext="handleValidNext" />
                         </keep-alive>
-                        <div style="position: absolute; bottom: 0; left: 0; width: 100%;" class="px-10 pb-10">
-                            <v-row>
-                                <v-col align="start" justify="center" class="pa-0">
-                                    <v-btn @click="navigate(-1)" variant="text" prepend-icon="fa-light fa-arrow-left" class="text-none"> back </v-btn>
-                                </v-col>
-                                <div v-if="currentStep!=4">
-                                <v-col align="end" justify="center" class="pa-0">
-                                    <v-btn @click="navigate(1)" variant="text" append-icon="fa-light fa-arrow-right" class="text-none" :disabled="!validNext"> next </v-btn>
-                                </v-col>
-                                </div>
-                            </v-row>
+                        <div style="position: absolute; bottom: 0; left: 0; width: 100%;" class="navigation-buttons">
+                            <v-btn @click="navigate(-1)" variant="text" prepend-icon="fa-light fa-arrow-left" class="text-none"> back </v-btn>
+                            <div v-if="currentStep!=4">
+                                <v-btn @click="navigate(1)" variant="text" append-icon="fa-light fa-arrow-right" class="text-none" :disabled="!validNext"> next </v-btn>
+                            </div>
                         </div>
                     </v-card>
                 </v-col>
@@ -121,5 +115,19 @@ export default {
 .bg {
     background-image: url('/gradient-background.png');
     background-size: cover;
+}
+
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    height: 100%;
+    width: 100%;
 }
 </style>

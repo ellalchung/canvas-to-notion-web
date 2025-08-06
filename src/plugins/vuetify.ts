@@ -7,10 +7,12 @@
 // Styles
 import 'font-awesome/css/font-awesome.min.css' 
 import 'vuetify/styles'
+import '@mdi/font/css/materialdesignicons.css';
 
 // Composables
 import { createVuetify, type ThemeDefinition } from 'vuetify'
-import { aliases, fa } from 'vuetify/iconsets/fa4'
+import { aliases as faAliases, fa } from 'vuetify/iconsets/fa4'
+import { aliases as mdiAliases, mdi } from 'vuetify/iconsets/mdi';
 import { VStepperVertical } from 'vuetify/labs/VStepperVertical'
 import { VDateInput } from 'vuetify/labs/VDateInput'
 
@@ -40,8 +42,12 @@ export default createVuetify({
   },
   icons: {
     defaultSet: 'fa',
-    aliases,
+    aliases: {
+      ...mdiAliases,
+      ...faAliases,
+      },
     sets: {
+      mdi,
       fa,
     },
   },
