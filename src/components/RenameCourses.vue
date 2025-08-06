@@ -40,10 +40,10 @@ export default {
     data() {
         return {
             startDate: new Date(),
-            items: [] as Map<number, string>[],
-            courseMap: {},
-            renamedCourses: {},
-            inputRenamedCourses: {},
+            items: [] as string[],
+            courseMap: {} as Record<number, string>,
+            renamedCourses: {} as Record<number, string>,
+            inputRenamedCourses: {} as Record<number, string>,
             savedInput: false,
             validSave: false,
             showTooltip: false

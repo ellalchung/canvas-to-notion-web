@@ -10,7 +10,7 @@ export const useAuthStore = defineStore("authStore", {
             userName: '',
             databaseId: '',
             courses: new Array(),
-            courseMap: new Map(),
+            courseMap: {} as Record<number, string>,
             assignments: new Array(),
             startDate: new Date()
         }
@@ -37,7 +37,7 @@ export const useAuthStore = defineStore("authStore", {
         setCourses(courses: Array<string>) {
             this.courses = courses;
         },
-        setCourseMap(courses: Map<number,string>) {
+        setCourseMap(courses: Record<number, string>) {
             this.courseMap = courses;
         },
         setAssignments(assignments: Array<string>) {
@@ -60,7 +60,7 @@ export const useAuthStore = defineStore("authStore", {
         getCourses(): Array<string> {
             return this.courses;
         },
-        getCourseMap(): Map<number,string> {
+        getCourseMap(): Record<number, string> {
             return this.courseMap;
         },
         getAssignments(): Array<string> {
