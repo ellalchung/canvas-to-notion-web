@@ -1,15 +1,20 @@
 <template>
     <div style="width: 80%;" align="center">
         <div align="start">
-            <h1>canvas calendar link</h1>
+            <div class="header">
+                <h1>canvas calendar link</h1>
+                <a class="icon" href="/calendar-help" target="_blank">
+                    <i class="mdi mdi-help-circle"></i>
+                </a>
+            </div>
             <v-text-field 
-            clearable
-            :rules="rules"
-            :error="!!errorMessage"
-            :error-messages="errorMessage ? [errorMessage] : []"
-            hint="Open Canvas, navigate to your Calendar, select on 'Calendar Feed', and paste the calendar link here"
-            v-model="calLink"
-            variant="outlined"/>
+                clearable
+                :rules="rules"
+                :error="!!errorMessage"
+                :error-messages="errorMessage ? [errorMessage] : []"
+                hint="Open Canvas, navigate to your Calendar, select on 'Calendar Feed', and paste the calendar link here"
+                v-model="calLink"
+                variant="outlined"/>
         </div>
     <v-btn color="primary" class="text-none" :loading="loading" :disabled="!isValidLink" @click="parseAssignments" width="20%">
         confirm
@@ -60,6 +65,9 @@ export default {
         goToHome() {
             this.$router.push("/");
         },
+        goToHelp() {
+            window.open('/calendar-help', '_blank');
+        },
         async parseAssignments() {
             this.loading = true;
             try {
@@ -91,3 +99,17 @@ export default {
 
 }
 </script>
+
+<style scoped>
+.header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon {
+    color: black;
+    font-size: 24px;
+    cursor: pointer;
+}
+</style>

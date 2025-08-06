@@ -8,6 +8,7 @@
 import Callback from '@/components/Callback.vue'
 import { createRouter, createWebHistory, type RouteLocation } from 'vue-router/auto'
 import GettingStarted from '@/components/GettingStarted.vue'
+import CalendarHelp from '@/pages/CalendarHelp.vue'
 
 
 const routes = [
@@ -15,7 +16,8 @@ const routes = [
   {path: '/getting-started', component: () => import('@/pages/gettingStarted.vue')},
   {path: '/setup', component: () => import('@/pages/setup.vue')},
   {path: '/testing', component: GettingStarted},
-  {path: '/callback', component: Callback}
+  {path: '/callback', component: Callback},
+  {path: '/calendar-help', component: CalendarHelp},
 ]
 
 const router = createRouter({
