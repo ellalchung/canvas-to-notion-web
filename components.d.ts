@@ -13,6 +13,7 @@ declare module 'vue' {
     Done: typeof import('./src/components/Done.vue')['default']
     GettingStarted: typeof import('./src/components/GettingStarted.vue')['default']
     GettingStartedInit: typeof import('./src/components/GettingStartedInit.vue')['default']
+    Header: typeof import('./src/components/Header.vue')['default']
     InputCalLink: typeof import('./src/components/InputCalLink.vue')['default']
     NotionLogin: typeof import('./src/components/NotionLogin.vue')['default']
     RenameCourses: typeof import('./src/components/RenameCourses.vue')['default']
