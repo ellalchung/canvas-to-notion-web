@@ -4,8 +4,12 @@
             <h1>course sync</h1>
         </div>
         <div class="header-links">
-            <h3> about </h3>
-            <h3> help </h3>
+            <div @click="goToAbout" style="cursor: pointer;">
+                <h3>about</h3>
+            </div>
+            <div @click="goToHelp" style="cursor: pointer;">
+                <h3>help</h3>
+            </div>
         </div>
     </div>
 </template>
@@ -16,6 +20,12 @@ export default {
     methods: {
         goToHome() {
             this.$router.push("/");
+        },
+        goToAbout() {
+            this.$router.push("/about");
+        },
+        goToHelp() {
+            this.$router.push("/help");
         }
     }
 }

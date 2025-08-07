@@ -18,6 +18,8 @@ const routes = [
   {path: '/testing', component: GettingStarted},
   {path: '/callback', component: Callback},
   {path: '/calendar-help', component: CalendarHelp},
+  {path: '/about', component: () => import('@/pages/About.vue')},
+  {path: '/help', component: () => import('@/pages/GeneralHelp.vue')},
 ]
 
 const router = createRouter({
