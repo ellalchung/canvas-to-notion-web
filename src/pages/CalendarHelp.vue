@@ -32,7 +32,7 @@ export default {
 
 <style scoped>
 .content {
-    padding: 50px
+    padding: 100px 50px
 }
 .bg {
     background-image: url('/gradient-background.png');
