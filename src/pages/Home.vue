@@ -36,20 +36,19 @@ export default {
 .actions {
     left: 0;
     margin-left: 10vw;
-    z-index: 1
+    z-index: 2
 }
 
 .image-layer {
-    position: relative;
+    position: absolute;
+    display: flex;
     right: 0;
-    z-index: 0;
 
     .background {
-        position: absolute;
+        position: relative;
         right: 0;
         top: 0;
-        transform: translateY(-50%);
-        z-index: -1;
+        z-index: 0;
         height: 100vh;
         img {
             object-fit: cover;
@@ -58,10 +57,10 @@ export default {
 
     .foreground {
         position: absolute;
-        transform: translateY(-50%);
-        top: 5vh;
-        right: 10vw;
+        top: 100px;
+        right: 100px;
         max-width: 700px;
+        z-index: 1;          
     }
 }
 
@@ -73,21 +72,19 @@ export default {
     }
 
     .actions {
+        position: absolute;
+        top: 15%;
+        left: 25%;
         margin-left: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
-        transform: translateY(0);
     }
 
     .image-layer {
-        bottom: 0;
-        transform: translateY(0);
-        width: 100%;
-
         .foreground {
             width: 600px;
-            top: 10vh;
+            top: 30%;
         }
     }
 }
