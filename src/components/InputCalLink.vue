@@ -54,9 +54,10 @@ export default {
     computed: {
         rules() {
             const canvasDomain = "canvas.eee.uci.edu";
+            const instructureDomain = "instructure.com";
             return [
                 value => !!value || "Required",
-                value => value.includes(canvasDomain) || "Please use a Canvas calendar link.",
+                value => value.includes(canvasDomain) || value.includes(instructureDomain) || "Please use a Canvas calendar link.",
                 value => value.includes(".ics") || "Invalid Canvas calendar link structure (not an .ics file).",
             ];
         },
